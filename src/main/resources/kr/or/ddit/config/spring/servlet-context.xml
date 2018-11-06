@@ -22,5 +22,12 @@
 		<property name="suffix" value=".jsp"/>
 	</bean>
 	<!-- hello :  /WEB-INF/view/hello.jsp-->
+	
+	<!-- multipartResolver 설정
+	해당 설정이 없으면 filepupload가 불가능하다 
+	bean id는 "multipartResolver"로 정해져 있다-->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="25000000"/>
+	</bean>
 
 </beans>
