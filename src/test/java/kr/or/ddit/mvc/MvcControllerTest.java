@@ -20,23 +20,25 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:kr/or/ddit/config/spring/servlet-context.xml",
-		"classpath:kr/or/ddit/config/spring/root-context.xml"})
-@WebAppConfiguration	//spring ioc 컨테이너 구성을 web 환경에 맞게 구성
-public class MvcControllerTest {
+import kr.or.ddit.test.ControllerTestConfig;
+
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = {"classpath:kr/or/ddit/config/spring/servlet-context.xml",
+//		"classpath:kr/or/ddit/config/spring/root-context.xml"})
+//@WebAppConfiguration	//spring ioc 컨테이너 구성을 web 환경에 맞게 구성
+public class MvcControllerTest extends ControllerTestConfig{
 
 	private Logger logger = LoggerFactory.getLogger("MvcControllerTest.class");
 	
-	@Autowired
-	private WebApplicationContext ctx;	//spring ioc컨테이너
-	
-	private MockMvc mockMvc;	//dispatcher servlet(front controller)
-	
-	@Before
-	public void setup() {
-		mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
-	}
+//	@Autowired
+//	private WebApplicationContext ctx;	//spring ioc컨테이너
+//	
+//	private MockMvc mockMvc;	//dispatcher servlet(front controller)
+//	
+//	@Before
+//	public void setup() {
+//		mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
+//	}
 	
 	@Test
 	public void mvcViewTest() throws Exception {

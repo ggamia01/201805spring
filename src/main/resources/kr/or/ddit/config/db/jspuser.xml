@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jspuser">
+  <select id="selectUserAll" resultType="userVo">
+    select * from jspuser
+  </select>
+  <select id="selectUser" resultType="userVo" parameterType="String">
+  	select * from jspuser where userId = #{userId}
+  </select>
+  <select id="selectUserByVo" resultType="userVo" parameterType="kr.or.ddit.user.model.UserVo">
+  	select * from jspuser where userId = #{userId}
+  </select>
+  <select id="selectUserPageList" resultType="userVo" parameterType="pageVo">
+	select *
+	from
+	(select rownum rnum, a.*
+	from
+	(select jspuser.* from jspuser order by userId) a)
+	where rnum between #{page}*#{pageSize}-(#{pageSize}-1) and
+	#{page}*#{pageSize}
+  </select>
+  <select id="getUserCnt" resultType="int">
+    select count(*) from jspuser
+  </select>
+  <!-- 사용자 등록 -->
+  <insert id="insertUser" parameterType="userVo">
+  	insert into jspuser (userId, name, pass, addr1, addr2, birth, zipcd, email,tel,profile)
+		values (#{userId},#{name},#{pass},#{addr1},#{addr2},#{birth},#{zipcd},#{email},#{tel},#{profile,jdbcType=VARCHAR})
+  </insert>
+  <!-- 사용자 삭제 -->
+  <delete id="deleteUser" parameterType="String">
+  	 delete from jspuser where userId = #{userId}
+  </delete>
+  <!-- 사용자 정보 수정 -->
+  <update id="userInfoUp" parameterType="userVo" >
+  	update jspuser set pass=#{pass},name=#{name}, addr1=#{addr1},addr2=#{addr2},zipcd=#{zipcd},email=#{email},tel=#{tel}
+  	<if test ="profile != null">,profile=#{profile}</if>
+		where userId = #{userId}
+  </update>
+  
+  <!-- 제품리스트 -->
+<!--   <select id="prodList" resultType="prodVo"> -->
+<!--   	select prod_id , prod_name, lprod_nm, prod_insdate from prod, lprod where prod_lgu = lprod_gu -->
+<!--   </select> -->
+  
+  
+
+  
+  <!-- 제품리스트 : 페이지처리 -->
+<!--   <select id="selectProdPageList" resultType="prodVo" parameterType="pageVo"> -->
+<!-- 	select * -->
+<!-- 	from -->
+<!-- 	(select rownum rnum, a.* -->
+<!-- 	from -->
+<!-- 	(select prod_id -->
+<!--     , prod_name -->
+<!--     , lprod_nm -->
+<!--     , prod_insdate -->
+<!--     from prod, lprod -->
+<!--     where prod_lgu = lprod_gu order by prod_id) a) -->
+<!-- 	where rnum between #{page}*#{pageSize}-(#{pageSize}-1) and -->
+<!-- 	#{page}*#{pageSize} -->
+<!--   </select> -->
+  <!-- 제품 건수 조회 -->
+<!--   <select id="getProdCnt" resultType="int"> -->
+<!--     select count(*) from prod -->
+<!--   </select> -->
+  <!-- 제품아이디로 select -->
+<!--   <select id="selectProd" resultType="prodVo" parameterType="String"> -->
+<!-- 	select * from -->
+<!-- 		(select prod_id -->
+<!-- 		    , prod_name -->
+<!-- 		    , lprod_nm -->
+<!-- 		    , buyer_name -->
+<!-- 		    , buyer_mail -->
+<!-- 		from prod, lprod, buyer -->
+<!-- 		where prod_lgu = lprod_gu -->
+<!-- 		and prod_buyer = buyer_id) -->
+<!-- 	where prod_id=#{prod_id} -->
+<!--   </select> -->
+</mapper>

@@ -17,25 +17,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.or.ddit.test.ControllerTestConfig;
 import kr.or.ddit.user.model.UserVo;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:kr/or/ddit/config/spring/servlet-context.xml",
-		"classpath:kr/or/ddit/config/spring/root-context.xml"})
-@WebAppConfiguration	//스프링 컨테이너를 web기반 컨테이너로 생성
-public class UserControllerTest {
+public class UserControllerTest extends ControllerTestConfig{
 
-	@Autowired
-	private WebApplicationContext ctx;
-	
-	private MockMvc mockMvc;
-	
-	//test메소드 시작전 준비작업을 실행하는 메소드
-	@Before
-	public void setup() {
-		mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
-	}
-	
 	/**
 	* Method : loginViewTest
 	* 작성자 : ASUS
