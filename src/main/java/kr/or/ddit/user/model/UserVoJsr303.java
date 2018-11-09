@@ -5,11 +5,17 @@ import java.util.Date;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class UserVo implements HttpSessionBindingListener{
+public class UserVoJsr303 implements HttpSessionBindingListener{
 	
+	@Length(min=5)
+	@NotEmpty
 	private String userId;
+	
+	@NotEmpty
 	private String name;
 	private String alias;
 
@@ -34,7 +40,7 @@ public class UserVo implements HttpSessionBindingListener{
 		Rnum = rnum;
 	}
 
-	public UserVo() {
+	public UserVoJsr303() {
 		
 	}
 

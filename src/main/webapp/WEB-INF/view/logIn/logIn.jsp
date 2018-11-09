@@ -22,7 +22,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     
-    <%@include file="/common/basicLib.jsp" %>
+    <%@include file="/WEB-INF/view/common/basicLib.jsp" %>
     
     <script type="text/javascript">
     $(document).ready(function(){

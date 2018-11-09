@@ -11,16 +11,33 @@
 	
 	<!-- 스프링에서 처리 불가능한 리소스를 was의 default servlet으로 전달 -->
 	<mvc:default-servlet-handler/>
+	
+	<!-- type -->
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean"/>
 
 	<context:annotation-config/>
 	<context:component-scan base-package="kr.or.ddit" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
 	</context:component-scan>
 	
+	<!-- view resolver -->
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="0"/>
+	</bean>
+	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="1"/>
 		<property name="prefix" value="/WEB-INF/view/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
+	
+	<!-- json 처리용 view -->
+	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+	
+	<!-- timestables customView -->
+	<bean id="timesTablesView" class="kr.or.ddit.mvc.view.TimesTablesView"/>
+	
 	<!-- hello :  /WEB-INF/view/hello.jsp-->
 	
 	<!-- multipartResolver 설정
@@ -28,6 +45,15 @@
 	bean id는 "multipartResolver"로 정해져 있다-->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="25000000"/>
+	</bean>
+	
+	<!-- messageSource -->
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>classpath:kr/or/ddit/config/msg/error</value>
+			</list>
+		</property>
 	</bean>
 
 </beans>
